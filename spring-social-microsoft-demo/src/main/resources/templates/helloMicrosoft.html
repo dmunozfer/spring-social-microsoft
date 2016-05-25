@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>Hello Microsoft</title>
+	</head>
+	<body>
+		<h3>Hello, <span th:text="${profile.name}">Some User</span>!</h3>
+		
+		<p>id: <span th:text="${profile.id}">Id</span></p>
+		<p>name: <span th:text="${profile.name}">name</span></p>
+		<p>firstName <span th:text="${profile.firstName}">First Name</span></p>
+		<p>lastName <span th:text="${profile.lastName}">lastName</span></p>
+		<p>gender: <span th:text="${profile.gender}">gender</span></p>
+		
+		<p>link: <span th:text="${profile.link}">link</span></p>
+		<p>locale: <span th:text="${profile.locale}">locale</span></p>
+		<p>email: <span th:text="${profile.email}">email</span></p>
+	</body>
+</html>
