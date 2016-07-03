@@ -7,7 +7,7 @@
 	<url>http://www.dmunozfer.es</url>
 	<groupId>es.dmunozfer</groupId>
 	<artifactId>spring-social-microsoft-demo</artifactId>
-	<version>0.1.0</version>
+	<version>${spring-social-microsoft.version}</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-social-microsoft.version>0.1.0</spring-social-microsoft.version>
+		<spring-social-microsoft.version>0.1.1</spring-social-microsoft.version>
 	</properties>
 
 	<dependencies>
@@ -41,19 +41,10 @@
 			<artifactId>spring-social-microsoft</artifactId>
 			<version>${spring-social-microsoft.version}</version>
 		</dependency>
-		<dependency>
+ 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-microsoft-autoconfigure</artifactId>
 			<version>${spring-social-microsoft.version}</version>
-		</dependency>
-		<!-- Optional: recomended for spring-social -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
 		</dependency>
 	</dependencies>
 

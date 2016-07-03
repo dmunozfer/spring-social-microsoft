@@ -15,36 +15,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/")
 public class HelloMicrosoftController {
-	private final static Log logger = LogFactory.getLog(HelloMicrosoftController.class);
+    private final static Log logger = LogFactory.getLog(HelloMicrosoftController.class);
 
-	private Microsoft microsoft;
-	private ConnectionRepository connectionRepository;
+    private Microsoft microsoft;
+    private ConnectionRepository connectionRepository;
 
-	@Inject
-	public HelloMicrosoftController(Microsoft microsoft, ConnectionRepository connectionRepository) {
-		this.microsoft = microsoft;
-		this.connectionRepository = connectionRepository;
-	}
-	
+    @Inject
+    public HelloMicrosoftController(Microsoft microsoft, ConnectionRepository connectionRepository) {
+	this.microsoft = microsoft;
+	this.connectionRepository = connectionRepository;
+    }
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String hello(Model model) {
-		return "redirect:/microsoft";
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public String hello(Model model) {
+	return "redirect:/microsoft";
+    }
 
-	@RequestMapping(method = RequestMethod.GET, path="/microsoft")
-	public String helloMicrosoft(Model model) {
-		if (connectionRepository.findPrimaryConnection(Microsoft.class) == null) {
-			return "redirect:/connect/microsoft";
-		}
-
-		LiveProfile profile = microsoft.liveOperations().getUserProfile();
-		if (logger.isDebugEnabled()) {
-			logger.debug("profile: " + profile);
-		}
-
-		model.addAttribute("profile", profile);
-		return "helloMicrosoft";
+    @RequestMapping(method = RequestMethod.GET, path = "/microsoft")
+    public String helloMicrosoft(Model model) {
+	if (connectionRepository.findPrimaryConnection(Microsoft.class) == null) {
+	    return "redirect:/connect/microsoft";
 	}
 
+	LiveProfile profile = microsoft.liveOperations().getUserProfile();
+	if (logger.isDebugEnabled()) {
+	    logger.debug("profile: " + profile);
+	}
+
+	model.addAttribute("profile", profile);
+	return "helloMicrosoft";
+    }
 }

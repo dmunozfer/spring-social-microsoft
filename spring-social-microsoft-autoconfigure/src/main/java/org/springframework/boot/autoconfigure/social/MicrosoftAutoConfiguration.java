@@ -14,8 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.core.env.Environment;
-import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.Connection;
@@ -24,10 +22,11 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.web.GenericConnectionStatusView;
 import org.springframework.social.microsoft.api.Microsoft;
 import org.springframework.social.microsoft.connect.MicrosoftConnectionFactory;
-import org.springframework.web.servlet.View;
+
 
 /**
- * {@link EnableAutoConfiguration Auto-configuration} for Spring Social connectivity with Microsoft.
+ * {@link EnableAutoConfiguration Auto-configuration} for Spring Social
+ * connectivity with Microsoft.
  *
  */
 @Configuration
@@ -37,34 +36,32 @@ import org.springframework.web.servlet.View;
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 public class MicrosoftAutoConfiguration {
 
-	@Configuration
-	@EnableSocial
-	@EnableConfigurationProperties(MicrosoftProperties.class)
-	@ConditionalOnWebApplication
-	protected static class MicrosoftConfigurerAdapter extends SocialConfigurerAdapter {
+    @Configuration
+    @EnableSocial
+    @EnableConfigurationProperties(MicrosoftProperties.class)
+    @ConditionalOnWebApplication
+    protected static class MicrosoftConfigurerAdapter extends SocialAutoConfigurerAdapter {
 
-		@Autowired
-		private MicrosoftProperties properties;
+	@Autowired
+	private MicrosoftProperties properties;
 
-		@Bean
-		@ConditionalOnMissingBean(Microsoft.class)
-		@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
-		public Microsoft microsoft(ConnectionRepository repository) {
-			Connection<Microsoft> connection = repository.findPrimaryConnection(Microsoft.class);
-			return connection != null ? connection.getApi() : null;
-		}
-
-		@Bean(name = { "connect/microsoftConnect", "connect/microsoftConnected" })
-		@ConditionalOnProperty(prefix = "spring.social", name = "auto-connection-views")
-		public View microsoftConnectView() {
-			return new GenericConnectionStatusView("microsoft", "Microsoft");
-		}
-
-		@Override
-		public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
-			ConnectionFactory<?> microsoftConnectionFactory = new MicrosoftConnectionFactory(this.properties.getAppId(),
-					this.properties.getAppSecret());
-			connectionFactoryConfigurer.addConnectionFactory(microsoftConnectionFactory);
-		}
+	@Bean
+	@ConditionalOnMissingBean(Microsoft.class)
+	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
+	public Microsoft microsoft(ConnectionRepository repository) {
+	    Connection<Microsoft> connection = repository.findPrimaryConnection(Microsoft.class);
+	    return connection != null ? connection.getApi() : null;
 	}
+
+	@Bean(name = { "connect/microsoftConnect", "connect/microsoftConnected" })
+	@ConditionalOnProperty(prefix = "spring.social", name = "auto-connection-views")
+	public GenericConnectionStatusView microsoftConnectView() {
+	    return new GenericConnectionStatusView("microsoft", "Microsoft");
+	}
+
+	@Override
+	protected ConnectionFactory<?> createConnectionFactory() {
+	    return new MicrosoftConnectionFactory(this.properties.getAppId(), this.properties.getAppSecret());
+	}
+    }
 }

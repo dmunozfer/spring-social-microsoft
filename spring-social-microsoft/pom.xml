@@ -10,10 +10,13 @@
 	<parent>
 		<groupId>org.springframework.social</groupId>
 		<artifactId>spring-social-microsoft-parent</artifactId>
-		<version>${spring-social-microsoft.version}</version>
+		<version>0.1.1</version>
 	</parent>
 
 	<dependencies>
+		<!-- ***************************************************** -->
+		<!-- ** Spring boot - social -->
+		<!-- ***************************************************** -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-core</artifactId>
@@ -27,17 +30,31 @@
 			<artifactId>spring-social-security</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- ***************************************************** -->
+		<!-- ** Spring boot - jackson -->
+		<!-- ***************************************************** -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		
+		<!-- ***************************************************** -->
+		<!-- ** Spring boot -->
+		<!-- ***************************************************** -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
