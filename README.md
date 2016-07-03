@@ -1,4 +1,4 @@
-# spring-social-microsoft v0.1.0
+# spring-social-microsoft v0.1.1
 
 ## Información
 Spring social microsoft es un conector de **spring-social** para la plataforma de Microsoft.
